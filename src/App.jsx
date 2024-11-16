@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <p>Goal Count down Timer</p>
+      <p className="bg-red-500">Goal Count down Timer</p>
     </>
   );
 }
