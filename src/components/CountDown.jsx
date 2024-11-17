@@ -1,47 +1,47 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-const oneDay = 24 * 60 * 60 * 1000;
-
-let currentDate = new Date();
-let currentYear = currentDate.getFullYear();
-let lastDay = new Date(`12/31/${currentYear}`);
-let total = lastDay - currentDate;
-const daysRemain = Math.round(Math.abs((currentDate - lastDay) / oneDay));
-const hoursRemain = Math.floor((total / (1000 * 60 * 60)) % 24);
-const minutesRemain = Math.floor((total / 1000 / 60) % 60);
-const secondsRemain = Math.floor((total / 1000) % 60);
-
 export default function CountDown() {
-  const [days, setDays] = useState(daysRemain);
-  const [hours, setHours] = useState(hoursRemain);
-  const [minutes, setMinutes] = useState(minutesRemain);
-  const [seconds, setSeconds] = useState(secondsRemain);
+  const [days, setDays] = useState();
+  const [hours, setHours] = useState();
+  const [minutes, setMinutes] = useState();
+  const [seconds, setSeconds] = useState();
 
   useEffect(() => {
-    let intervalId = "";
-    const CountDownTimer = () => {
-      intervalId = setInterval(() => {
-        if (seconds === 0) {
-          return 0;
-        } else {
-          setSeconds(seconds - 1);
-        }
-      }, 1000);
+    const fetchData = () => {
+      const oneDay = 24 * 60 * 60 * 1000;
+      let currentDate = new Date();
+      let currentYear = currentDate.getFullYear();
+      let lastDay = new Date(`12/31/${currentYear}`);
+      let total = lastDay - currentDate;
+
+      const daysWithoutZero = Math.round(
+        Math.abs((currentDate - lastDay) / oneDay)
+      );
+      const daysRemain = `${daysWithoutZero}`.padStart(2, "0"); // "05"
+      setDays(daysRemain);
+
+      const hoursWithoutZero = Math.floor((total / (1000 * 60 * 60)) % 24);
+      const hoursRemain = `${hoursWithoutZero}`.padStart(2, "0"); // "05"
+      setHours(hoursRemain);
+
+      const minutesWithoutZero = Math.floor((total / 1000 / 60) % 60);
+      const minutesRemain = `${minutesWithoutZero}`.padStart(2, "0"); // "05"
+      setMinutes(minutesRemain);
+
+      const secondsWithoutZero = Math.floor((total / 1000) % 60);
+      const secondsRemain = `${secondsWithoutZero}`.padStart(2, "0"); // "05"
+      setSeconds(secondsRemain);
     };
 
-    // CountDownTimer();
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [seconds]);
+    fetchData();
+  }, [days, hours, minutes, seconds]);
   return (
-    <div className="bg-black h-screen flex items-center justify-center">
-      <div className="text-white">Hello from CountDown</div>
-      <div className="flex text-white text-2xl">
-        <div>Days until your goal</div>
-        <div>
-          {days}:{hours}:{minutes}:{seconds}
+    <div className="bg-black h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center space-y-8 text-white text-2xl leading-relaxed md:text-[100px]">
+        <div className="font-inter">Days until your goal</div>
+        <div className="font-inter font-semibold">
+          {days} days {hours} : {minutes} : {seconds}
         </div>
       </div>
     </div>
