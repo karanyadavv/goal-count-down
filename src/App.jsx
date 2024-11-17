@@ -1,11 +1,8 @@
 import "./App.css";
+import CountDown from "./components/CountDown";
 
 function App() {
-  return (
-    <>
-      <p className="bg-red-500">Goal Count down Timer</p>
-    </>
-  );
+  return <CountDown />;
 }
 
 export default App;
