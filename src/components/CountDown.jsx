@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function CountDown() {
-  const [days, setDays] = useState();
-  const [hours, setHours] = useState();
-  const [minutes, setMinutes] = useState();
-  const [seconds, setSeconds] = useState();
+  const [days, setDays] = useState("00");
+  const [hours, setHours] = useState("00");
+  const [minutes, setMinutes] = useState("00");
+  const [seconds, setSeconds] = useState("00");
 
   let intervalId = "";
   useEffect(() => {
