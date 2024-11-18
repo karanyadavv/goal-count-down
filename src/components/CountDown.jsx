@@ -13,8 +13,8 @@ export default function CountDown() {
       const fetchGoal = () => {
         const oneDay = 24 * 60 * 60 * 1000;
         let currentDate = new Date();
-        let currentYear = currentDate.getFullYear();
-        let lastDay = new Date(`12/31/${currentYear}`);
+        let currentYear = currentDate.getFullYear() + 1;
+        let lastDay = new Date(`1/1/${currentYear}`);
         let total = lastDay - currentDate;
 
         const daysWithoutZero = Math.round(
