@@ -1,5 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import NumberFlow from "@number-flow/react";
+
+const format = {
+  // notation: "compact",
+  // pre: 0,
+  // trailingZeroDisplau: "stripIfInteger",
+  // compactDisplay: 'short',
+  // roundingMode: 'trunc'
+};
 
 export default function CountDown() {
   const [days, setDays] = useState("00");
@@ -48,8 +57,13 @@ export default function CountDown() {
         <div className="text-sm md:text-2xl border border-zinc-600 rounded-xl px-4 py-2">
           Days until your goal
         </div>
-        <div className=" font-semibold text-[38px] md:text-[100px]">
+        {/* <div className=" font-semibold text-[38px] md:text-[100px]">
           {days} days {hours} : {minutes} : {seconds}
+        </div> */}
+        <div className=" font-semibold text-[38px] md:text-[100px]">
+          <NumberFlow value={days} /> days{" "}
+          <NumberFlow format={format} value={hours} /> :{" "}
+          <NumberFlow value={minutes} /> : <NumberFlow value={seconds} />
         </div>
         <button className="border border-zinc-600 rounded-xl px-4 py-2 text-xs flex items-center gap-2">
           <svg
