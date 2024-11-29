@@ -1,7 +1,7 @@
 export default function SpecificGoal() {
   const months = [1, 2, 3];
   return (
-    <div className="text-white flex-col justify-center items-center space-y-6 p-4 border border-zinc-600 rounded-md absolute bottom-14 md:bottom-12 md:right-12">
+    <div className="text-white flex-col justify-center items-center space-y-6 p-4 border border-zinc-600 rounded-md absolute bottom-16 md:bottom-12 md:right-12">
       <div className="text-white flex space-x-8 p-4 border border-zinc-800 rounded-md bottom-0">
         <div>
           <select
