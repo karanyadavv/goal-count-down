@@ -44,7 +44,7 @@ export default function CountDown() {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [lastDay]);
   return (
     <div className="bg-black h-screen flex flex-col items-center justify-center font-inter fixed inset-0">
       <div className="flex flex-col items-center justify-center space-y-8 text-white leading-relaxed">
@@ -61,7 +61,7 @@ export default function CountDown() {
           {lastDay.toLocaleDateString()}
         </div>
       </div>
-      <SpecificGoal />
+      <SpecificGoal setLastDay={setLastDay} lastDay={lastDay} />
     </div>
   );
 }
