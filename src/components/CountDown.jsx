@@ -57,8 +57,14 @@ export default function CountDown() {
           <NumberFlow value={time.minutes} /> :{" "}
           <NumberFlow value={time.seconds} />
         </div>
-        <div className="text-sm md:text-2xl border border-zinc-600 rounded-xl px-4 py-2">
-          {lastDay.toLocaleDateString()}
+        <div className="text-sm md:text-xl border border-zinc-600 rounded-xl px-4 py-2">
+          <span className="text-zinc-400">Your current goal: </span>
+          {lastDay.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            formatMatcher: "basic",
+          })}
         </div>
       </div>
       <SpecificGoal setLastDay={setLastDay} lastDay={lastDay} />
