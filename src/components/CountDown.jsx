@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import NumberFlow from "@number-flow/react";
 import SpecificGoal from "./SpecificGoal";
+import useStickyState from "../hooks/useStickyState";
 
 export default function CountDown() {
   const currentYear = new Date().getFullYear() + 1;
   const initialCountDown = new Date(`1/1/${currentYear}`);
-  const [lastDay, setLastDay] = useState(initialCountDown);
+  const [lastDay, setLastDay] = useStickyState(initialCountDown, "lastday");
 
   const [time, setTime] = useState({
     days: "00",
@@ -19,8 +20,6 @@ export default function CountDown() {
     const fetchGoal = () => {
       const oneDay = 24 * 60 * 60 * 1000;
       let currentDate = new Date();
-      // let currentYear = currentDate.getFullYear() + 1;
-      // let lastDay = new Date(`1/1/${currentYear}`);
       let total = lastDay - currentDate;
 
       const daysWithoutZero = Math.round(
@@ -48,7 +47,7 @@ export default function CountDown() {
   return (
     <div className="bg-black h-screen flex flex-col items-center justify-center font-inter fixed inset-0">
       <div className="flex flex-col items-center justify-center space-y-8 text-white leading-relaxed">
-        <div className="text-sm md:text-2xl border border-zinc-600 rounded-xl px-4 py-2">
+        <div className="text-xs md:text-xl border border-zinc-600 rounded-xl px-4 py-2">
           Days until your goal
         </div>
         <div className=" font-semibold text-[38px] md:text-[100px]">
@@ -57,7 +56,7 @@ export default function CountDown() {
           <NumberFlow value={time.minutes} /> :{" "}
           <NumberFlow value={time.seconds} />
         </div>
-        <div className="text-sm md:text-xl border border-zinc-600 rounded-xl px-4 py-2">
+        <div className="text-xs md:text-xl border border-zinc-600 rounded-xl px-4 py-2">
           <span className="text-zinc-400">Your current goal: </span>
           {lastDay.toLocaleDateString("en-GB", {
             day: "numeric",
