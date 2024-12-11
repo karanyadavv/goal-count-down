@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function SpecificGoal({ setLastDay }) {
-  const months = [1, 2, 3];
+  const months = [0, 1, 2, 3];
   const [datePicker, setDatePicker] = useState(null);
   const [month, setMonth] = useState("");
 
@@ -30,6 +30,8 @@ export default function SpecificGoal({ setLastDay }) {
   useEffect(() => {
     const date = new Date();
     switch (month) {
+      case "0":
+        break;
       case "1":
         date.setDate(date.getDate() + 30);
         setLastDay(date);
