@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function SpecificGoal({ setLastDay, lastDay }) {
   const months = [1, 2, 3];
   const [datePicker, setDatePicker] = useState(null);
-  const [month, setMonth] = useState();
+  const [month, setMonth] = useState("");
 
   useEffect(() => {
     document.addEventListener("click", (event) => {
@@ -20,17 +20,40 @@ export default function SpecificGoal({ setLastDay, lastDay }) {
   }, []);
 
   const handleDatePicker = (date) => {
-    setDatePicker(date);
+    // setDatePicker(date);
+    // if (datePicker === null) return;
+    setLastDay(date);
   };
 
   const handleMonth = (e) => {
     setMonth(e.target.value);
     console.log(e.target.value);
-    const date = new Date();
-    date.setDate(date.getDate() + 30);
-    console.log(date, "hey");
-    setLastDay(date);
   };
+
+  useEffect(() => {
+    const date = new Date();
+    switch (month) {
+      case "1":
+        date.setDate(date.getDate() + 30);
+        console.log(date, "hey");
+        setLastDay(date);
+        break;
+      case "2":
+        date.setDate(date.getDate() + 60);
+        console.log(date, "hey");
+        setLastDay(date);
+        break;
+      case "3":
+        date.setDate(date.getDate() + 90);
+        console.log(date, "hey");
+        setLastDay(date);
+        break;
+      default:
+        console.log("hey from default");
+        break;
+    }
+  }, [month]);
+
   const handleGoal = () => {
     if (datePicker === null) return;
     setLastDay(datePicker);
@@ -50,12 +73,7 @@ export default function SpecificGoal({ setLastDay, lastDay }) {
           >
             {months.map((item, index) => {
               return (
-                <option
-                  // onChange={() => handleMonth(value)}
-                  className=""
-                  value={item}
-                  key={index}
-                >
+                <option className="" value={item} key={index}>
                   {item}
                 </option>
               );
@@ -63,6 +81,7 @@ export default function SpecificGoal({ setLastDay, lastDay }) {
           </select>
           month from now
         </div>
+        <div className="border-r border-zinc-500"></div>
         <div className="bg-black">
           <DatePicker
             wrapperClassName="datePicker"
@@ -76,14 +95,14 @@ export default function SpecificGoal({ setLastDay, lastDay }) {
           />
         </div>
       </div>
-      <div className="flex justify-center items-center">
+      {/* <div className="flex justify-center items-center">
         <button
           onClick={handleGoal}
           className="bg-white text-black p-2 whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50"
         >
           Set your goal
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
